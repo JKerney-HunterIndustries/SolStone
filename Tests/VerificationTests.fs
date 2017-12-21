@@ -1,9 +1,9 @@
-namespace ThingStead.Tests.Core
+namespace ThingStead.Tests.Verification
 open ThingStead.Core.SharedTypes
 open ThingStead.Verification
 open ThingStead.TestBuilder.Scripting
 
-module VerificationTests = 
+module Verification = 
     let tests =
         suite "Verification" (
             feature "expectsToBe" [

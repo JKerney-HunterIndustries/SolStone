@@ -8,9 +8,6 @@
     <Compile Include="Library.fs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\Core\SharedTypes\SharedTypes.fsproj" />
-  </ItemGroup>
-  <ItemGroup>
     <PackageReference Update="FSharp.Core" Version="4.2.3" />
   </ItemGroup>
 </Project>

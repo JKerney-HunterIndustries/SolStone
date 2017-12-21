@@ -10,7 +10,8 @@ module Program =
         [
             TestRunners.DefaultRunner.tests
             TestBuilders.Scripting.tests
-            Core.VerificationTests.tests
+            Verification.Verification.tests
+            Verification.GoldenMaster.tests
         ] 
         |> List.concat
         |> product "Thingstead"

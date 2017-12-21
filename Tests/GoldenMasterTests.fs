@@ -1,9 +1,9 @@
 ﻿namespace ThingStead.Tests.Verification
-open ThingStead.Core.SharedTypes
 open ThingStead.TestBuilder.Scripting
 open ThingStead.Verification
 open ThingStead.Verification.GoldenMaster
 open ThingStead.Verification.GoldenMaster.Raw
+open System
 
 module GoldenMaster = 
 
@@ -79,12 +79,12 @@ module GoldenMaster =
             ]
 
         let buildReporterTests = 
-            feature "build reporter" [
+            feature "as reporter" [
                 "gives a method that calls the report method"
                     |> testedWith (fun _ ->
                         let mutable wasCalled = false
                         let reportFunction = (fun _ -> wasCalled <- true; ())
-                        let reporter = buildReporter reportFunction
+                        let reporter = asReporter reportFunction
                         { Standard = (); Recieved = () } |> reporter |> ignore
                         wasCalled |> expectsToBe true
                     )
@@ -94,9 +94,22 @@ module GoldenMaster =
                         let data = "Done"
                         let expected = data |> Ok
                         let reportFunction = (fun _ -> data)
-                        let reporter = buildReporter reportFunction
+                        let reporter = asReporter reportFunction
                         let actual = 
                             { Standard = (); Recieved = () } |> reporter
+                        actual |> expectsToBe expected
+                    )
+
+                "returns the result Error with the exception if the report function throws an error"
+                    |> testedWith (fun _ ->
+                        let ex = Exception "New Exception"
+                        let expected = ex |> Error
+                        let reportFunction = fun _ -> raise ex
+                        let reporter = asReporter reportFunction
+
+                        let actual = 
+                            { Standard = (); Recieved = () } |> reporter
+
                         actual |> expectsToBe expected
                     )
             ]

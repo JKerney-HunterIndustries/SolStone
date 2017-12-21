@@ -15,5 +15,8 @@ module Raw =
         if standard = recieved then StandardMet
         else StandardNotMet { Standard = standard; Recieved = recieved }
 
-    let buildReporter fn _ = 
-        fn () |> Ok
+    let asReporter fn _ = 
+        try
+            fn () |> Ok
+        with
+        | ex -> ex |> Error

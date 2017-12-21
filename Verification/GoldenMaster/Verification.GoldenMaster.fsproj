@@ -5,7 +5,7 @@
     <AssemblyName>Thingstead.Verification.GoldenMaster</AssemblyName>
   </PropertyGroup>
   <ItemGroup>
-    <Compile Include="Library.fs" />
+    <Compile Include="Raw.fs" />
   </ItemGroup>
   <ItemGroup>
     <PackageReference Update="FSharp.Core" Version="4.2.3" />

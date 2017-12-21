@@ -14,3 +14,6 @@ module Raw =
     let isVerifiedAgainst standard recieved = 
         if standard = recieved then StandardMet
         else StandardNotMet { Standard = standard; Recieved = recieved }
+
+    let buildReporter fn _ = 
+        fn () |> Ok

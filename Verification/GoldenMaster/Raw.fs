@@ -15,8 +15,8 @@ module Raw =
         if standard = recieved then StandardMet
         else StandardNotMet { Standard = standard; Recieved = recieved }
 
-    let asReporter fn _ = 
+    let asReporter fn data = 
         try
-            fn () |> Ok
+            fn data |> Ok
         with
         | ex -> ex |> Error

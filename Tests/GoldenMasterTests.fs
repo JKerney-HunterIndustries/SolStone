@@ -112,6 +112,19 @@ module GoldenMaster =
 
                         actual |> expectsToBe expected
                     )
+
+                "calls the report function with the data passed to it"
+                    |> testedWith (fun _ ->
+                        let mutable actual = { Standard = ""; Recieved = "" }
+                        let data = { Standard = "Standard"; Recieved = "Recieved" }
+                        let expected = data 
+                        let reportFunction = fun input -> actual <- input; ()
+                        let reporter = asReporter reportFunction
+
+                        data |> reporter |> ignore
+
+                        actual |> expectsToBe expected
+                    )
             ]
 
         groupedBy "raw" (
